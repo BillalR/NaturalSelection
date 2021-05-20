@@ -1,5 +1,5 @@
 //Global class objects
-int population = 20;
+int population = 100;
 int GENE_LENGTH = 1000;
 mover[] blobs = new mover[population];
 goal point = new goal();
@@ -58,7 +58,7 @@ void draw() {
     //blobs[i].edges();
     
     if (blobs[i].collision(point.position()) == true){
-      blobs[i].circle.setFill(color(255,0,0));
+      //blobs[i].circle.setFill(color(255,0,0));
       reboot = true;
       break;
     }
@@ -145,7 +145,7 @@ void reproduce(){
      }
      
      //Mutate the baby, X-Men style
-     for(int k = 0; k < population; k++){
+     for(int k = 0; k < GENE_LENGTH; k++){
       if(random(1) < mutationRate){
         blobs[i].genePool[k].x = random(-1,1);
         blobs[i].genePool[k].y = random(-1,1);
