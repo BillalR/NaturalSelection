@@ -1,6 +1,6 @@
 //Global class objects
 int population = 100;
-int GENE_LENGTH = 1000;
+int GENE_LENGTH = 500;
 mover[] blobs = new mover[population];
 goal point = new goal();
 
@@ -8,7 +8,7 @@ goal point = new goal();
 int iterations = 10000;
 PFont f;
 int generation = 0;
-float mutationRate = 0.02; //In percent
+float mutationRate = 0.01; //In percent
 boolean reboot = false;
 
 //Global count
@@ -36,7 +36,7 @@ void setup() {
   
   //populate the little thingy
   for(int i = 0; i < population; i++){ 
-    iPosition = new PVector( (int) width/2, (int) 700);
+    iPosition = new PVector( (int) width/2, (int) 600);
     blobs[i] = new mover(iPosition);
     blobs[i].genePool = createGenes(GENE_LENGTH);
   }
@@ -55,9 +55,12 @@ void draw() {
     PVector force = new PVector(blobs[i].genePool[geneCount].x, blobs[i].genePool[geneCount].y);
     blobs[i].applyForce(force);
     blobs[i].update();
-    //blobs[i].edges();
     
     if (blobs[i].collision(point.position()) == true){
+      reboot = true;
+      break;
+    } else if(blobs[i].edges() == true)
+    {
       reboot = true;
       break;
     }
@@ -80,7 +83,7 @@ void draw() {
   
     //populate the little thingy
   for(int i = 0; i < population; i++){ 
-    iPosition = new PVector( (int) width/2, (int) 700);
+    iPosition = new PVector( (int) width/2, (int) 600);
     blobs[i].position = iPosition;
   }
   
@@ -114,10 +117,17 @@ float calcFitness(PVector blobPos){
 void naturalSelection(){
     float n = 0;
     for(int i = 0; i < population; i++){
-      n =  round(blobs[i].fitness* 100);
+      n =  round(blobs[i].fitness * 100);
+      /*if (blobs[i].fitness >= 0.9){
+        n =  round(blobs[i].fitness * 200);
+      }
+       else {
+         n =  round(blobs[i].fitness * 100);
+       }*/
       for(int j = 0; j < (int) n; j++)
       {
         mattingPool.add(blobs[i]);
+        
       }
     }
 }
@@ -143,10 +153,12 @@ void reproduce(){
      
      //Mutate the baby, X-Men style
      for(int k = 0; k < GENE_LENGTH; k++){
-      if(random(1) < mutationRate){
-        blobs[i].genePool[k].x = random(-.25,0.25);
+      if(random(0,1) < mutationRate){
+        blobs[i].genePool[k].x = random(-1,1);
+        blobs[i].genePool[k].y = random(-1, 1);
          }
        }
     }
+    mattingPool.clear();
   
 }

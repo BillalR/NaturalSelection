@@ -26,23 +26,24 @@ class mover {
     velocity.add(acceleration);
     velocity.limit(3);
   }
-  void edges(){
-    
+  boolean edges(){
+    /*
     if(position.x >= width - 10){
       position.x = width-10;
     } else if (position.x <= 10){
       position.x = 10;
-    }
-    if(position.y >= height-10){
-      position.y = height-10;
-    } else if (position.y <= 10){
-      position.y = 10;
+    }*/
+   if (position.y <= 10){ //|| position.y >= height - 10){
+      return true;
+    } else
+    {
+      return false;
     }
   }
   
  boolean collision(PVector pos){
    float distance = sqrt(sq(position.x - pos.x) + sq(position.y - pos.y));
-   if(distance < 50){
+   if(distance <= 10){
        return true;
     } else {
       return false;
