@@ -10,7 +10,6 @@ class goal{
     score = 0;
     square = createShape(RECT, width/2, 5, 10, 10);
     square.setFill(color(0,0,255));
-    //square.setStroke(false);
   }
   
   void display(){

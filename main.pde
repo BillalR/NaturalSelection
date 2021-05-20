@@ -58,7 +58,6 @@ void draw() {
     //blobs[i].edges();
     
     if (blobs[i].collision(point.position()) == true){
-      //blobs[i].circle.setFill(color(255,0,0));
       reboot = true;
       break;
     }
@@ -108,8 +107,6 @@ float calcFitness(PVector blobPos){
   PVector goalPosition = point.position();
   float distanceToGoal = sqrt(sq(blobPos.x-goalPosition.x)+sq(blobPos.y-goalPosition.y));
   float normalizedDistance = distanceToGoal / height;
-  //float normalizedDistanceY = distanceToGoal / width;
-  //float normalizedDistance = normalizedDistanceX + normalizedDistanceY;
   fitness = 1 - normalizedDistance;
   return fitness;
 }
@@ -147,8 +144,7 @@ void reproduce(){
      //Mutate the baby, X-Men style
      for(int k = 0; k < GENE_LENGTH; k++){
       if(random(1) < mutationRate){
-        blobs[i].genePool[k].x = random(-1,1);
-        blobs[i].genePool[k].y = random(-1,1);
+        blobs[i].genePool[k].x = random(-.25,0.25);
          }
        }
     }

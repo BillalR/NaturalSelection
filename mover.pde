@@ -51,8 +51,7 @@ class mover {
  
   void display(){
     shape(circle, position.x, position.y);
-    
-    //circle(position.x, position.y, blobSize);
+
   }
   
 
