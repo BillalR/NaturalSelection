@@ -118,12 +118,6 @@ void naturalSelection(){
     float n = 0;
     for(int i = 0; i < population; i++){
       n =  round(blobs[i].fitness * 100);
-      /*if (blobs[i].fitness >= 0.9){
-        n =  round(blobs[i].fitness * 200);
-      }
-       else {
-         n =  round(blobs[i].fitness * 100);
-       }*/
       for(int j = 0; j < (int) n; j++)
       {
         mattingPool.add(blobs[i]);
